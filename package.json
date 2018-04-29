@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sonar": "scripts/sonar.local",
+    "sonar-local": "scripts/sonar.local",
+    "sonar": "scripts/sonar",
     "test": "scripts/test",
     "coveralls": "scripts/coveralls"
   },
