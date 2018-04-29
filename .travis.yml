@@ -3,7 +3,7 @@ node_js:
   - '8'
 before_install:
   - 'sudo apt-get install unzip'
-  - scripts/sonar-runner
+  - scripts/install/sonar-scanner
 after_success: 
   - 'npm run coveralls'
   - 'npm run sonar'
