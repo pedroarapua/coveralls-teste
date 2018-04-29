@@ -1,7 +1,6 @@
 # coveralls-teste
 
-
-![node](https://img.shields.io/node/v/passport.svg)
+![GitHub package version](https://img.shields.io/github/package-json/v/badges/shields.svg)
 ![Github All Releases](https://img.shields.io/github/downloads/pedroarapua/coveralls-teste/total.svg)
 ![Travis branch](https://img.shields.io/travis/pedroarapua/coveralls-teste.svg)
 [![Coverage Status](https://coveralls.io/repos/pedroarapua/coveralls-teste/badge.svg?branch=master)](https://coveralls.io/r/pedroarapua/coveralls-teste?branch=master)
