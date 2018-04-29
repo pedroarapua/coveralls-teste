@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cd "$(dirname "$0")/.."
+
+APP_NAME=$(node -e 'console.log(require("./package.json").name)')
+
+echo "===> Running Sonar..."
+
+. ./.env
+
+${HOME}/sonar-scanner/bin/sonar-scanner \
+  -Dsonar.projectKey=${SONAR_APP_NAME:-${APP_NAME}} \
+  -Dsonar.sources=src \
+  -Dsonar.host.url=${SONAR_HOST_URL:-http://localhost:9000}

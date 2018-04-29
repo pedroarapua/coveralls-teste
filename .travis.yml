@@ -1,4 +1,9 @@
 language: node_js
 node_js:
   - '8'
-after_success: 'npm run coveralls'
+before_install:
+  - 'sudo apt-get install unzip'
+  - scripts/sonar-runner
+after_success: 
+  - 'npm run coveralls'
+  - 'npm run sonar'

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cd "$(dirname "$0")/.."
+
+APP_NAME=$(node -e 'console.log(require("./package.json").name)')
+
+echo "===> Running Sonar..."
+
+${HOME}/sonar-scanner/bin/sonar-scanner \
+  -Dsonar.projectKey=${SONAR_APP_NAME:-${APP_NAME}} \
+  -Dsonar.organization=${ORGANIZATION_NAME:-pedroarapua-github} \
+  -Dsonar.sources=src \
+  -Dsonar.host.url=https://sonarcloud.io \
+  -Dsonar.login=${SONAR_TOKEN}

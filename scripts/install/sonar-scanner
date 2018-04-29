@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd "$(dirname "$0")/.."
+
+FILENAME="sonar-scanner-cli-3.1.0.1141-linux.zip"
+FOLDERNAME="sonar-scanner-3.1.0.1141-linux"
+PRETTYFOLDERNAME="sonar-scanner"
+
+wget -O ${HOME}/${FILENAME} https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/${FILENAME}
+unzip ${HOME}/${FILENAME} -d ${HOME}
+mv ${HOME}/${FOLDERNAME} ${HOME}/${PRETTYFOLDERNAME}
+rm ${HOME}/${FILENAME}
+
+cp -a scripts/sonar/. ${HOME}/${PRETTYFOLDERNAME}
+chmod +x ${HOME}/${PRETTYFOLDERNAME}/bin/sonar-scanner

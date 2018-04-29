@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/nyc --reporter=html --reporter=text ./node_modules/.bin/_mocha",
-    "coveralls": "./node_modules/.bin/nyc report --reporter=text-lcov | coveralls"
+    "sonar": "scripts/sonar.local",
+    "test": "scripts/test",
+    "coveralls": "scripts/coveralls"
   },
   "repository": {
     "type": "git",
