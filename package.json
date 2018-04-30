@@ -9,7 +9,7 @@
     "sonar": "scripts/sonar",
     "test": "scripts/test",
     "changelog": "scripts/changelog-generator",
-    "release-github": "scripts/chandler",
+    "github-release": "scripts/chandler",
     "coveralls": "scripts/coveralls"
   },
   "repository": {
