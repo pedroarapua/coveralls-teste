@@ -9,4 +9,4 @@ if ! [ -x "$(command -v gem)" ]; then
   exit 1
 fi
 
-~/ruby/bin/gem install github_changelog_generator
+sudo gem install github_changelog_generator

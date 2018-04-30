@@ -9,4 +9,4 @@ if ! [ -x "$(command -v gem)" ]; then
   exit 1
 fi
 
-~/ruby/bin/gem install chandler
+sudo gem install chandler
