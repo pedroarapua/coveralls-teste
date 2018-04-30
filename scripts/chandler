@@ -6,10 +6,5 @@ export $(egrep -v '^#' .env | xargs)
 APP_VERSION=$(node -e 'console.log(require("./package.json").version)')
 
 echo "===> Running Chandler..."
-echo ${APP_VERSION}
 
-if [ -e "./.env" ]; then
-  . ./.env
-fi
-
-chandler push ${APP_VERSION}
+chandler push v${APP_VERSION}
