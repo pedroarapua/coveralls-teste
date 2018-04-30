@@ -15,4 +15,3 @@ rm ${HOME}/${FILENAME}
 
 cp -a scripts/install/sonar/. ${HOME}/${PRETTYFOLDERNAME}
 chmod +x ${HOME}/${PRETTYFOLDERNAME}/bin/sonar-scanner
-sudo cp ${HOME}/${PRETTYFOLDERNAME}/bin/sonar-scanner /usr/local/bin

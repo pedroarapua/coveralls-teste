@@ -7,4 +7,9 @@ APP_VERSION=$(node -e 'console.log(require("./package.json").version)')
 
 echo "===> Running Chandler..."
 
+if ! [ -x "$(command -v chandler)" ]; then
+  echo 'Error: chandler is not installed'
+  exit 1
+fi
+
 chandler push v${APP_VERSION}

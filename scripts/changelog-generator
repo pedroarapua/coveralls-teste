@@ -8,7 +8,7 @@ APP_NAME=$(node -e 'console.log(require("./package.json").name)')
 echo "===> Running changelog generator..."
 
 if ! [ -x "$(command -v github_changelog_generator)" ]; then
-  echo 'Error: github_changelog_generator is not installed' >&2
+  echo 'Error: github_changelog_generator is not installed'
   exit 1
 fi
 
