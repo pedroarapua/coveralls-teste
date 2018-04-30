@@ -7,3 +7,5 @@ before_install:
 after_success: 
   - 'npm run coveralls'
   - 'npm run sonar'
+  - 'npm run changelog'
+  - 'npm run github-release'
