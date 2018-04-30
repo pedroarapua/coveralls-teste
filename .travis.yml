@@ -9,7 +9,7 @@ cache:
 before_install:
   - 'sudo apt-get install unzip'
   - scripts/install/sonar-scanner
-  - scripts/install/ruby-travis
+  - scripts/install/ruby
   - scripts/install/changelog-generator
   - scripts/install/chandler
 after_success: 
