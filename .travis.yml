@@ -4,6 +4,9 @@ node_js:
 before_install:
   - 'sudo apt-get install unzip'
   - scripts/install/sonar-scanner
+  - scripts/install/ruby
+  - scripts/install/changelog-generator
+  - scripts/install/chandler
 after_success: 
   - 'npm run coveralls'
   - 'npm run sonar'
