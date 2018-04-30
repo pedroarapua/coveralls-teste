@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd "$(dirname "$0")/../.."
+
+echo "===> Installing changelog generator..."
+
+if ! [ -x "$(command -v gem)" ]; then
+  ./scripts/install/ruby    
+fi
+
+sudo gem install github_changelog_generator

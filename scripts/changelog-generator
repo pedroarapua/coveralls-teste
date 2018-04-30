@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cd "$(dirname "$0")/.."
+
+APP_NAME=$(node -e 'console.log(require("./package.json").name)')
+
+echo "===> Running changelog generator..."
+
+. ./.env
+
+if ! [ -x "$(command -v github_changelog_generator)" ]; then
+  ./scripts/install/changelog-generator
+fi
+
+github_changelog_generator -u generator -p ${APP_NAME} --enhancement-labels 'enhancement,Enhancement,features,Features,feature' --exclude-labels 'duplicate,question,invalid,wontfix,ignore,changelog ignore' --base CHANGELOG.md
