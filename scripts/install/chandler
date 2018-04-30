@@ -5,7 +5,8 @@ cd "$(dirname "$0")/../.."
 echo "===> Installing chandler..."
 
 if ! [ -x "$(command -v gem)" ]; then
-  ./scripts/install/ruby    
+  echo 'Error: gem is not installed'
+  exit 1
 fi
 
 sudo gem install chandler

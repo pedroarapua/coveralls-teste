@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cd "$(dirname "$0")/.."
+
+APP_VERSION=$(node -e 'console.log(require("./package.json").version)')
+
+echo "===> Running Chandler..."
+echo ${APP_VERSION}
+
+if [ -e "./.env" ]; then
+  . ./.env
+fi
+
+chandler push ${APP_VERSION}

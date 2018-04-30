@@ -6,7 +6,9 @@ APP_NAME=$(node -e 'console.log(require("./package.json").name)')
 
 echo "===> Running Sonar..."
 
-. ./.env
+if [ -e "./.env" ]; then
+  . ./.env
+fi
 
 ${HOME}/sonar-scanner/bin/sonar-scanner \
   -Dsonar.projectKey=${SONAR_APP_NAME:-${APP_NAME}} \
