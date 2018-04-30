@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "linter": "node_modules/.bin/eslint .",
     "sonar-local": "scripts/sonar.local",
     "sonar": "scripts/sonar",
     "test": "scripts/test",
@@ -21,12 +22,13 @@
   "homepage": "https://github.com/pedroarapua/coveralls-teste#readme",
   "devDependencies": {
     "coveralls": "^3.0.0",
+    "eslint": "^4.19.1",
     "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
     "nyc": "^11.7.1"
   },
-  "engines" : { 
-    "node" : ">=8.9",
-    "npm" : ">=5.6" 
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">=5.6"
   }
 }

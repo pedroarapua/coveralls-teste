@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../.."
+
+echo "===> Sonar Scanner..."
 
 FILENAME="sonar-scanner-cli-3.1.0.1141-linux.zip"
 FOLDERNAME="sonar-scanner-3.1.0.1141-linux"
@@ -13,3 +15,4 @@ rm ${HOME}/${FILENAME}
 
 cp -a scripts/sonar/. ${HOME}/${PRETTYFOLDERNAME}
 chmod +x ${HOME}/${PRETTYFOLDERNAME}/bin/sonar-scanner
+sudo cp ${HOME}/${PRETTYFOLDERNAME}/bin/sonar-scanner /usr/local/bin

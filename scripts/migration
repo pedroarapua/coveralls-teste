@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# script/migration: Execute the migration script to update or downgrade database.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "===> Migrating DB..."
+# node_modules/.bin/knex migrate:latest
+
+echo "==> App is now ready to go!"

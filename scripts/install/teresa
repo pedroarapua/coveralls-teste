@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd "$(dirname "$0")/../.."
+
+echo "===> Installing teresa..."
+
+TERESA_VERSION=${TERESA_VERSION:-"v0.19.0"}
+wget -O ${HOME}/teresa https://github.com/luizalabs/teresa/releases/download/${TERESA_VERSION}/teresa-linux-amd64
+chmod +x ${HOME}/teresa
+sudo mv ${HOME}/teresa /usr/local/bin
