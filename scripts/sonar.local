@@ -1,14 +1,11 @@
 #!/bin/sh
 
 cd "$(dirname "$0")/.."
+export $(egrep -v '^#' .env | xargs)
 
 APP_NAME=$(node -e 'console.log(require("./package.json").name)')
 
 echo "===> Running Sonar..."
-
-if [ -e "./.env" ]; then
-  . ./.env
-fi
 
 ${HOME}/sonar-scanner/bin/sonar-scanner \
   -Dsonar.projectKey=${SONAR_APP_NAME:-${APP_NAME}} \

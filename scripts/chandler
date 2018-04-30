@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cd "$(dirname "$0")/.."
+export $(egrep -v '^#' .env | xargs)
 
 APP_VERSION=$(node -e 'console.log(require("./package.json").version)')
 
