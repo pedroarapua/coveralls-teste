@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd "$(dirname "$0")/../.."
+
+echo "===> Installing ruby..."
+
+RUBY_FOLDER_NAME="ruby-2.5.1"
+PRETTYFOLDERNAME="ruby"
+
+wget -O ${HOME}/${RUBY_FOLDER_NAME}.tar.bz2 https://rvm.io/binaries/ubuntu/16.04/x86_64/${RUBY_FOLDER_NAME}.tar.bz2
+tar jxf $HOME/${RUBY_FOLDER_NAME}.tar.bz2 -C $HOME
+
+rm $HOME/${RUBY_FOLDER_NAME}.tar.bz2
+
+mv ${HOME}/${RUBY_FOLDER_NAME} ${HOME}/${PRETTYFOLDERNAME}
+chmod +x ${HOME}/${PRETTYFOLDERNAME}/bin/gem
