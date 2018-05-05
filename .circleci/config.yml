@@ -47,8 +47,8 @@ workflows:
     jobs:
       - test
       - release:
-        requires:
-          - approval-production
+          requires:
+            - test
           filters:
             branches:
               ignore: /.*/
