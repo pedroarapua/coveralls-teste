@@ -4,17 +4,17 @@ node_js:
 cache:
   directories:
     - /home/travis/.rvm/
-    #- /home/travis/sonar-scanner
     - node_modules # NPM packages
+
 before_install:
   - 'sudo apt-get install unzip'
   - scripts/install/sonar-scanner
   #- rvm install 2.5.0
-  #- scripts/install/changelog-generator
-  #- scripts/install/chandler
+  - scripts/install/changelog-generator
+  - scripts/install/chandler
 after_success: 
-  #- 'npm run coveralls'
-  #- 'npm run sonar'
+  - 'npm run coveralls'
+  - 'npm run sonar'
   - 'scripts/sonar-pullrequest'
-  #- 'npm run changelog'
-  #- 'npm run github-release'
+  - 'npm run changelog'
+  - 'npm run github-release'
