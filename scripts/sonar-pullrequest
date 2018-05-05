@@ -14,7 +14,7 @@ if ! [ -x "$(command -v ~/sonar-scanner/bin/sonar-scanner)" ]; then
   exit 1
 fi
 
-~/sonar-scanner/bin/sonar-scanner 
+~/sonar-scanner/bin/sonar-scanner \
   -Dsonar.analysis.mode=preview \
   -Dsonar.github.pullRequest=${PULL_REQUEST_ID} \
   -Dsonar.github.repository=${ORGANIZATION_NAME:-pedroarapua-github}/${SONAR_APP_NAME:-${APP_NAME}} \

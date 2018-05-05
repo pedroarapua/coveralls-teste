@@ -15,7 +15,6 @@ unzip ${HOME}/${FILENAME} -d ${HOME}
 rm ${HOME}/${FILENAME}
 rm -rf ${HOME}/${PRETTYFOLDERNAME}
 mv -T ${HOME}/${FOLDERNAME} ${HOME}/${PRETTYFOLDERNAME}
-ls ${HOME}/${PRETTYFOLDERNAME}
 
 cp -a scripts/install/sonar/. ${HOME}/${PRETTYFOLDERNAME}
 chmod +x ${HOME}/${PRETTYFOLDERNAME}/bin/sonar-scanner
