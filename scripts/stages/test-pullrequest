@@ -7,3 +7,5 @@ cd "$(dirname "$0")/../.."
 echo "===> Running Stages Test..."
 
 scripts/test
+scripts/coveralls
+scripts/sonar-pullrequest
