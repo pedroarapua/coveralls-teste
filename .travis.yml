@@ -12,7 +12,8 @@ before_install:
   - rvm install 2.5.0
   - scripts/install/changelog-generator
   - scripts/install/chandler
-after_success: 
+
+  script: 
   - 'npm run coveralls'
   - 'npm run sonar'
   - 'scripts/sonar-pullrequest'
