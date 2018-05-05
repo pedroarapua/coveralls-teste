@@ -6,6 +6,9 @@ cache:
     - /home/travis/.rvm/
     - node_modules # NPM packages
 
+env:
+  - PULL_REQUEST_ID: ${TRAVIS_PULL_REQUEST}
+
 before_install:
   - 'sudo apt-get install unzip'
   - scripts/install/sonar-scanner
