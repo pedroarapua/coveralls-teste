@@ -118,3 +118,8 @@ workflows:
       - "deploy-production":
           requires:
             - "approval-production"
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v.*/
