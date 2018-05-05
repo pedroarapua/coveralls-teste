@@ -13,6 +13,7 @@ PRETTYFOLDERNAME="sonar-scanner"
 wget -O ${HOME}/${FILENAME} https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/${FILENAME}
 unzip ${HOME}/${FILENAME} -d ${HOME}
 rm ${HOME}/${FILENAME}
+rm -rf ${HOME}/${PRETTYFOLDERNAME}
 mv -T ${HOME}/${FOLDERNAME} ${HOME}/${PRETTYFOLDERNAME}
 ls ${HOME}/${PRETTYFOLDERNAME}
 
