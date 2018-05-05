@@ -40,17 +40,15 @@ jobs:
       - run: 
           name: "release"
           command: "scripts/stages/release"
-      
+
 workflows:
   version: 2
-  workflow: 
+  build_and_test:
     jobs:
       - test
       - release:
           requires:
             - test
           filters:
-            branches:
-              ignore: /.*/
             tags:
-              only: /.*/      
+              only: /.*/
