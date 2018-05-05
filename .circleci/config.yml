@@ -89,11 +89,11 @@ workflows:
       - release:
           requires:
             - test
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
+          #filters:
+          #  branches:
+          #    ignore: /.*/
+          #  tags:
+          #    only: /.*/
       - "approval-stage":
           type: approval
           requires:
