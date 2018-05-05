@@ -21,12 +21,8 @@ stages:
 jobs:
   include:
     - stage: test
-      script: npm test
-    - stage: test
-      script: npm run coveralls
-    - stage: test
-      script: 'scripts/sonar-pullrequest'
-
+      script: scripts/stages/test
+    
     - stage: release
       script: npm run changelog
       script: npm run github-release

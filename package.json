@@ -10,6 +10,7 @@
     "test": "scripts/test",
     "changelog": "scripts/changelog-generator",
     "github-release": "scripts/chandler",
+    "precoveralls": "scripts/test",
     "coveralls": "scripts/coveralls"
   },
   "repository": {
