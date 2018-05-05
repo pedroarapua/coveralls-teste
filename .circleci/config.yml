@@ -1,0 +1,54 @@
+defaults: &defaults
+  working_directory: ~/opt/app
+  docker:
+    - image: circleci/node:8.9
+
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8.9
+    working_directory: ~/opt/app
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - restore_cache: # special step to restore the dependency cache 
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "setup project"
+          command: "scripts/setup"
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: 
+          name: "pre test"
+          command: "scripts/stages/pre-test"
+      - run: 
+          name: "test"
+          command: "scripts/stages/test"
+      - store_artifacts:
+          path: ~/opt/app/coverage
+          destination: tmp/test/coverage
+  
+  release:
+    <<: *defaults
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - run: 
+          name: "pre release"
+          command: "scripts/stages/pre-release"
+      - run: 
+          name: "release"
+          command: "scripts/stages/release"
+      
+workflows:
+  version: 2
+  workflow: 
+    jobs:
+      - build
+      - release:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/      

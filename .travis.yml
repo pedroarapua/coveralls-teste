@@ -10,11 +10,8 @@ env:
   - PULL_REQUEST_ID: ${TRAVIS_PULL_REQUEST}
 
 before_install:
-  - 'sudo apt-get install unzip'
-  - scripts/install/sonar-scanner
-  - rvm install 2.5.0
-  - scripts/install/changelog-generator
-  - scripts/install/chandler
+  - scripts/stages/pre-test
+  - scripts/stages/pre-release
 
 addons:
   artifacts:
@@ -40,5 +37,4 @@ jobs:
       script: scripts/stages/test-pullrequest
       
     - stage: release
-      script: npm run changelog
-      script: npm run github-release
+      script: scripts/release
