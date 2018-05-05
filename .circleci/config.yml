@@ -51,6 +51,6 @@ workflows:
             - test
           filters:
             branches:
-              only: /.*/
+              ignore: /.*/
             tags:
-              ignore: /.*/      
+              only: /.*/      
