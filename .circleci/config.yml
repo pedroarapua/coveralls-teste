@@ -3,21 +3,25 @@ defaults: &defaults
   docker:
     - image: circleci/node:8.9
 
+steps_default: &defaults
+  steps: # a collection of executable commands 
+    - checkout # special step to check out source code to working directory
+    - restore_cache: # special step to restore the dependency cache 
+        key: dependency-cache-{{ checksum "package.json" }}
+    - run:
+        name: "setup project"
+        command: "scripts/setup"
+    - save_cache: # special step to save the dependency cache
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+        - ./node_modules
+
 version: 2
 jobs:
   test:
     <<: *defaults
+    <<: *steps_default
     steps: # a collection of executable commands 
-      - checkout # special step to check out source code to working directory
-      - restore_cache: # special step to restore the dependency cache 
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: "setup project"
-          command: "scripts/setup"
-      - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
       - run: 
           name: "pre test"
           command: "scripts/stages/pre-test"
