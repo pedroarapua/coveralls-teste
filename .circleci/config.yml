@@ -2,8 +2,6 @@ defaults: &defaults
   working_directory: ~/opt/app
   docker:
     - image: circleci/node:8.9
-      environment:
-        PULL_REQUEST_ID: ${CIRCLE_PR_NUMBER}
 
 version: 2
 jobs:
@@ -31,7 +29,9 @@ jobs:
           destination: tmp/test/coverage
   
   release:
-    <<: *defaults
+    working_directory: ~/opt/app
+    docker:
+      - image: circleci/ruby:2.5-node
     steps: # a collection of executable commands 
       - checkout # special step to check out source code to working directory
       - run: 
@@ -47,6 +47,8 @@ workflows:
     jobs:
       - test
       - release:
+          requires:
+            - test
           filters:
             branches:
               only: /.*/
