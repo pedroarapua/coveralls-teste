@@ -86,14 +86,19 @@ workflows:
   workflow:
     jobs:
       - test
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
       - release:
           requires:
             - test
-          #filters:
-          #  branches:
-          #    ignore: /.*/
-          #  tags:
-          #    only: /.*/
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v.*/
       - "approval-stage":
           type: approval
           requires:
