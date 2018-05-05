@@ -41,7 +41,7 @@ jobs:
           name: "release"
           command: "scripts/stages/release"
   
-  deploy-staging]:
+  deploy-staging:
     <<: *defaults
     steps: # a collection of executable commands 
       - checkout # special step to check out source code to working directory
