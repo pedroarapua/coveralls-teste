@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/../.."
+export $(egrep -v '^#' .env | xargs)
+
+echo "===> Running Pre Deploy..."
+
+scripts/install/teresa
+
+teresa config set-cluster production --server teresa.magazineluiza.com.br --tls --current
+echo ${TERESA_PASSWORD} | teresa login --user=${TERESA_USER}

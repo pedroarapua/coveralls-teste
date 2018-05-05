@@ -5,7 +5,7 @@ set -e
 cd "$(dirname "$0")/../.."
 export $(egrep -v '^#' .env | xargs)
 
-echo "===> Running Stage Test..."
+echo "===> Running Test..."
 
 scripts/test
 scripts/coveralls
