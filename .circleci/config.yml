@@ -102,7 +102,7 @@ workflows:
       - "approval-production":
           type: approval
           requires:
-            - production
+            - release
       - "deploy-production":
           requires:
             - "approval-production"
