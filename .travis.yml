@@ -5,11 +5,14 @@ cache:
   bundler: true
   directories:
     - /home/travis/.rvm/
+    - /home/travis/sonar-scanner
     - node_modules # NPM packages
 before_install:
   - 'sudo apt-get install unzip'
   - scripts/install/sonar-scanner
-  - scripts/install/ruby
+  - ruby --version
+  - rvm install 2.5.0
+  - ruby --version
   - scripts/install/changelog-generator
   - scripts/install/chandler
 after_success: 

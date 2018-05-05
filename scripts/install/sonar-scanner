@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 cd "$(dirname "$0")/../.."
 
 echo "===> Sonar Scanner..."
@@ -10,8 +12,9 @@ PRETTYFOLDERNAME="sonar-scanner"
 
 wget -O ${HOME}/${FILENAME} https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/${FILENAME}
 unzip ${HOME}/${FILENAME} -d ${HOME}
-mv ${HOME}/${FOLDERNAME} ${HOME}/${PRETTYFOLDERNAME}
 rm ${HOME}/${FILENAME}
+mv -T ${HOME}/${FOLDERNAME} ${HOME}/${PRETTYFOLDERNAME}
+ls ${HOME}/${PRETTYFOLDERNAME}
 
 cp -a scripts/install/sonar/. ${HOME}/${PRETTYFOLDERNAME}
 chmod +x ${HOME}/${PRETTYFOLDERNAME}/bin/sonar-scanner
