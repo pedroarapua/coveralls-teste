@@ -4,7 +4,7 @@ node_js:
 cache:
   directories:
     - /home/travis/.rvm/
-    - /home/travis/sonar-scanner
+    #- /home/travis/sonar-scanner
     - node_modules # NPM packages
 before_install:
   - 'sudo apt-get install unzip'
