@@ -16,6 +16,11 @@ before_install:
   - scripts/install/changelog-generator
   - scripts/install/chandler
 
+addons:
+  artifacts:
+    # ...
+    working_dir: coverage
+
 stages:
   - name: test
   - name: release
