@@ -6,13 +6,6 @@ cache:
     - /home/travis/.rvm/
     - node_modules # NPM packages
 
-before_install:
-  - 'sudo apt-get install unzip'
-  - scripts/install/sonar-scanner
-  - rvm install 2.5.0
-  - scripts/install/changelog-generator
-  - scripts/install/chandler
-
 stages:
   - name: test
   - name: release
@@ -28,4 +21,3 @@ jobs:
     - stage: release
       script: npm run changelog
       script: npm run github-release
-
