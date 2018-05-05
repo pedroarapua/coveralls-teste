@@ -14,12 +14,11 @@ if ! [ -x "$(command -v ~/sonar-scanner/bin/sonar-scanner)" ]; then
   exit 1
 fi
 
-~/sonar-scanner/bin/sonar-scanner -Dsonar.analysis.mode=preview \
-  -Dsonar.projectKey=${SONAR_APP_NAME:-${APP_NAME}} \
-  -Dsonar.organization=${ORGANIZATION_NAME:-pedroarapua-github} \
+~/sonar-scanner/bin/sonar-scanner 
+  -Dsonar.analysis.mode=preview \
   -Dsonar.github.pullRequest=${PULL_REQUEST_ID} \
   -Dsonar.github.repository=${ORGANIZATION_NAME:-pedroarapua-github}/${SONAR_APP_NAME:-${APP_NAME}} \
-  -Dsonar.github.oauth=$GITHUB_ACCESS_TOKEN \
+  -Dsonar.github.oauth=${SONAR_GITHUB_TOKEN} \
   -Dsonar.sources=src \
   -Dsonar.host.url=https://sonarcloud.io \
   -Dsonar.login=${SONAR_TOKEN}
