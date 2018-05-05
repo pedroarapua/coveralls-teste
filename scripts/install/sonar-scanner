@@ -16,4 +16,5 @@ mv ${HOME}/${FOLDERNAME} ${HOME}/${PRETTYFOLDERNAME}
 rm ${HOME}/${FILENAME}
 
 cp -a scripts/install/sonar/. ${HOME}/${PRETTYFOLDERNAME}
+ls ${HOME}/${PRETTYFOLDERNAME}/bin/
 chmod +x ${HOME}/${PRETTYFOLDERNAME}/bin/sonar-scanner
