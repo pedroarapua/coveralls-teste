@@ -106,11 +106,6 @@ workflows:
       - "deploy-staging":
           requires:
             - "approval-stage"
-          filters:
-            branches:
-              only: /.*/
-            tags:
-              only: /.*/
       - "approval-production":
           type: approval
           requires:
@@ -120,6 +115,6 @@ workflows:
             - "approval-production"
           filters:
             branches:
-              only: /.*/
+              ignore: /.*/
             tags:
-              only: /.*/
+              only: /v.*/
