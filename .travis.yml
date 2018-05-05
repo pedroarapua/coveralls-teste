@@ -37,4 +37,4 @@ jobs:
       script: scripts/stages/test-pullrequest
       
     - stage: release
-      script: scripts/release
+      script: scripts/stages/release
