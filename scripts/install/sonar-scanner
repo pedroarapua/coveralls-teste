@@ -12,8 +12,8 @@ PRETTYFOLDERNAME="sonar-scanner"
 
 wget -O ${HOME}/${FILENAME} https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/${FILENAME}
 unzip ${HOME}/${FILENAME} -d ${HOME}
-ls ${HOME}
 mv ${HOME}/${FOLDERNAME} ${HOME}/${PRETTYFOLDERNAME}
+ls ${HOME}
 rm ${HOME}/${FILENAME}
 
 cp -a scripts/install/sonar/. ${HOME}/${PRETTYFOLDERNAME}
