@@ -86,10 +86,23 @@ workflows:
   workflow:
     jobs:
       - test
-      - "deploy-staging"
       - release:
           requires:
             - test
           filters:
             tags:
               only: /.*/
+      - "approval-stage":
+          type: approval
+          requires:
+            - test
+      - "deploy-staging":
+          requires:
+            - "approval-stage"
+      - "approval-production":
+          type: approval
+          requires:
+            - production
+      - "deploy-production":
+          requires:
+            - "approval-production"
