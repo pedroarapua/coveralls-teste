@@ -13,9 +13,19 @@ before_install:
   - scripts/install/changelog-generator
   - scripts/install/chandler
 
-script: 
-  - 'npm run coveralls'
-  - 'npm run sonar'
-  - 'scripts/sonar-pullrequest'
-  - 'npm run changelog'
-  - 'npm run github-release'
+stages:
+  - name: test
+  - name: release
+    if: branch = master AND NOT type = pull_request
+
+jobs:
+  include:
+    - stage: test
+      script: npm test
+      script: npm run coveralls
+      script: 'scripts/sonar-pullrequest'
+
+    - stage: release
+      script: npm run changelog
+      script: npm run github-release
+
