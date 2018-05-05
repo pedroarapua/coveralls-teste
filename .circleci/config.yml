@@ -2,13 +2,13 @@ defaults: &defaults
   working_directory: ~/opt/app
   docker:
     - image: circleci/node:8.9
+      environment:
+        PULL_REQUEST_ID: ${CIRCLE_PR_NUMBER}
 
 version: 2
 jobs:
   test:
-    docker:
-      - image: circleci/node:8.9
-    working_directory: ~/opt/app
+    <<: *defaults
     steps: # a collection of executable commands 
       - checkout # special step to check out source code to working directory
       - restore_cache: # special step to restore the dependency cache 
