@@ -15,18 +15,18 @@ addons:
     working_dir: coverage
 
 stages:
-  - name: test
-    if: type IN (push)
+  - test
+    #if: type IN (push)
     
-  - name: release
-    if: tag =~ /v.*/
+  - release
+    #if: tag =~ /v.*/
 
 jobs:
   include:
     - stage: test
-      script: scripts/stages/pre-test
-    - stage: test
-      script: scripts/stages/test
+      script: |
+        scripts/stages/pre-test
+        scripts/stages/test
     
     #- stage: release
     #  - script: scripts/stages/release
