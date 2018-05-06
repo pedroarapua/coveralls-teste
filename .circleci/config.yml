@@ -5,6 +5,8 @@ defaults: &defaults
 
 
 default_filters_tag: &default_filters_tag
+  branches:
+    ignore: /.*/
   tags:
     only: /v.*/
 
