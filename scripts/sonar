@@ -6,8 +6,10 @@ cd "$(dirname "$0")/.."
 export $(egrep -v '^#' .env | xargs)
 
 APP_NAME=$(node -e 'console.log(require("./package.json").name)')
+PULL_REQUEST_ID="${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}"
 
 echo "===> Running Sonar..."
+echo ${PULL_REQUEST_ID}
 
 if ! [ -x "$(command -v ~/sonar-scanner/bin/sonar-scanner)" ]; then
   echo 'Error: sonar-scanner is not installed'
