@@ -18,17 +18,17 @@ stages:
   - test
     if: type IN (push)
     
-  #- release
-  #  if: tag =~ /v.*/
+  - release
+    if: tag =~ /v.*/
 
 jobs:
   include:
     - stage: test
       script: |
-        scripts/stages/pre-test
-        scripts/stages/test
+          scripts/stages/pre-test
+          scripts/stages/test
     
     - stage: release
       script: |
-        scripts/stages/pre-release
-        scripts/stages/release
+          scripts/stages/pre-release
+          scripts/stages/release
