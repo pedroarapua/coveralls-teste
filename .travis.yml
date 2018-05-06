@@ -24,9 +24,10 @@ stages:
 jobs:
   include:
     - stage: test
-      - script: scripts/stages/pre-test
-      - script: scripts/stages/test
+      script: scripts/stages/pre-test
+    - stage: test
+      script: scripts/stages/test
     
-    - stage: release
-      - script: scripts/stages/release
-      - script: scripts/stages/pre-release
+    #- stage: release
+    #  - script: scripts/stages/release
+    #  - script: scripts/stages/pre-release
