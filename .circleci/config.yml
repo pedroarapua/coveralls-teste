@@ -3,7 +3,7 @@ defaults: &defaults
   docker:
     - image: circleci/node:8.9
 
-steps_default: &defaults
+steps_default: &steps_default
   steps: # a collection of executable commands 
     - checkout # special step to check out source code to working directory
     - restore_cache: # special step to restore the dependency cache 
