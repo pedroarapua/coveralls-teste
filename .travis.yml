@@ -16,7 +16,6 @@ addons:
 
 stages:
   - name: test
-    if: type IN (push, pull_request)
     
   - name: release
     if: tag =~ ^v
