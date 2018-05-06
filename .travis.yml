@@ -15,11 +15,11 @@ addons:
     working_dir: coverage
 
 stages:
-  - test
-    #if: type IN (push)
+  - name: test
+    if: type IN (push, pull_request)
     
-  - release
-    #if: tag =~ /v.*/
+  - name: release
+    if: tag =~ ^v
 
 jobs:
   include:
