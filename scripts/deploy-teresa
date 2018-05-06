@@ -9,17 +9,11 @@ cd "$(dirname "$0")/.."
 APP_NAME=$(node -e 'console.log(require("./package.json").name)')
 VERSION=$(node -e 'console.log(require("./package.json").version)')
 
-echo "===> Building app..."
+echo "===> Running Deploy Teresa..."
 
 if ! [ -x "$(command -v teresa)" ]; then
     echo 'Error: teresa is not installed' >&2
     exit 1
 fi
-
-if [[ $1 != "" ]]; then
-    APP_NAME=$( echo $1)
-fi
-
-echo "===> Deploy..."
 
 teresa deploy create . --app $APP_NAME --description "Deploy release $VERSION"
