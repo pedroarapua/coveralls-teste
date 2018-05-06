@@ -1,9 +1,40 @@
 language: node_js
 node_js:
   - '8'
+cache:
+  directories:
+    - /home/travis/.rvm/
+    - node_modules # NPM packages
+
+env:
+  - PULL_REQUEST_ID: ${TRAVIS_PULL_REQUEST}
+
 before_install:
-  - 'sudo apt-get install unzip'
-  - scripts/install/sonar-scanner
-after_success: 
-  - 'npm run coveralls'
-  - 'npm run sonar'
+  - scripts/stages/pre-test
+  - scripts/stages/pre-release
+
+addons:
+  artifacts:
+    # ...
+    working_dir: coverage
+
+stages:
+  - name: test
+    if: type IN (push)
+    
+  - name: "test pull request"
+    if: type IN (pull_request)
+    
+  - name: release
+    if: tag =~ /.*/
+
+jobs:
+  include:
+    - stage: test
+      script: scripts/stages/test
+    
+    - stage: "test pull request"
+      script: scripts/stages/test-pullrequest
+      
+    - stage: release
+      script: scripts/stages/release

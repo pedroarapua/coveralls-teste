@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/../.."
+export $(egrep -v '^#' .env | xargs)
+
+echo "===> Running Test..."
+
+scripts/test
+scripts/coveralls
+scripts/sonar

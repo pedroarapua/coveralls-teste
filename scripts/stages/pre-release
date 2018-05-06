@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd "$(dirname "$0")/../.."
+
+echo "===> Running Pre Release..."
+
+rvm install 2.5.0
+scripts/install/changelog-generator
+scripts/install/chandler

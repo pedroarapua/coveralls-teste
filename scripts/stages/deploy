@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/../.."
+
+APP_NAME=$(node -e 'console.log(require("./package.json").name)')
+VERSION=$(node -e 'console.log(require("./package.json").version)')
+
+echo "===> Running Deploy..."
+
+if ! [ -x "$(command -v teresa)" ]; then
+    echo 'Error: teresa is not installed' >&2
+    exit 1
+fi
+
+teresa deploy create . --app $APP_NAME --description "Deploy release $VERSION" --no-input .

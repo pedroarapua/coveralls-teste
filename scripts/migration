@@ -5,6 +5,7 @@
 set -e
 
 cd "$(dirname "$0")/.."
+export $(egrep -v '^#' .env | xargs)
 
 echo "===> Migrating DB..."
 # node_modules/.bin/knex migrate:latest

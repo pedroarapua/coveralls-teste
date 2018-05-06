@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/../.."
+export $(egrep -v '^#' .env | xargs)
+
+echo "===> Running Release..."
+
+scripts/changelog-generator
+scripts/chandler

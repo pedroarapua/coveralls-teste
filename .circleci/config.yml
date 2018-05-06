@@ -1,0 +1,125 @@
+defaults: &defaults
+  working_directory: ~/opt/app
+  docker:
+    - image: circleci/node:8.9
+
+version: 2
+jobs:
+  test:
+    <<: *defaults
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - restore_cache: # special step to restore the dependency cache 
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "setup project"
+          command: "scripts/setup"
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: 
+          name: "pre test"
+          command: "scripts/stages/pre-test"
+      - run: 
+          name: "test"
+          command: "scripts/stages/test"
+      - store_artifacts:
+          path: ~/opt/app/coverage
+          destination: tmp/test/coverage
+  
+  release:
+    working_directory: ~/opt/app
+    docker:
+      - image: circleci/ruby:2.5-node
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - run: 
+          name: "pre release"
+          command: "scripts/stages/pre-release"
+      - run: 
+          name: "release"
+          command: "scripts/stages/release"
+  
+  deploy-staging:
+    <<: *defaults
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - restore_cache: # special step to restore the dependency cache 
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "install npm depencencies"
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: "Pre Deploy"
+          command: "scripts/stages/pre-deploy-staging"
+      - run: 
+          name: "Deploy Teresa"
+          command: "scripts/stages/deploy"
+
+  deploy-production:
+    <<: *defaults
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - restore_cache: # special step to restore the dependency cache 
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "install npm depencencies"
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: "Pre Deploy"
+          command: "scripts/stages/pre-deploy"
+      - run: 
+          name: "Deploy Teresa"
+          command: "scripts/stages/deploy"          
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - release:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v.*/
+      - "approval-stage":
+          type: approval
+          requires:
+            - test
+      - "deploy-staging":
+          requires:
+            - "approval-stage"
+      - "approval-production":
+          type: approval
+          requires:
+            - release
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v.*/
+      - "deploy-production":
+          requires:
+            - "approval-production"
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v.*/
