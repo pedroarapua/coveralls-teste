@@ -9,10 +9,6 @@ cache:
 env:
   - PULL_REQUEST_ID: ${TRAVIS_PULL_REQUEST}
 
-before_install:
-  - scripts/stages/pre-test
-  - scripts/stages/pre-release
-
 addons:
   artifacts:
     # ...
@@ -23,15 +19,14 @@ stages:
     if: type IN (push)
     
   - name: release
-    if: tag =~ /.*/
+    if: tag =~ /v.*/
 
 jobs:
   include:
     - stage: test
-      script: scripts/stages/test
+      - script: scripts/stages/pre-test
+      - script: scripts/stages/test
     
-    - stage: "test pull request"
-      script: scripts/stages/test-pullrequest
-      
     - stage: release
-      script: scripts/stages/release
+      - script: scripts/stages/release
+      - script: scripts/stages/pre-release
