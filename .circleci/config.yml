@@ -3,21 +3,24 @@ defaults: &defaults
   docker:
     - image: circleci/node:8.9
 
+steps_project: &steps_project
+  - checkout # special step to check out source code to working directory
+  - restore_cache: # special step to restore the dependency cache 
+      key: dependency-cache-{{ checksum "package.json" }}
+  - run:
+      name: "setup project"
+      command: "scripts/setup"
+  - save_cache: # special step to save the dependency cache
+      key: dependency-cache-{{ checksum "package.json" }}
+      paths:
+        - ./node_modules
+
 version: 2
 jobs:
   test:
     <<: *defaults
     steps: # a collection of executable commands 
-      - checkout # special step to check out source code to working directory
-      - restore_cache: # special step to restore the dependency cache 
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: "setup project"
-          command: "scripts/setup"
-      - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
+      - *steps_project
       - run: 
           name: "pre test"
           command: "scripts/stages/pre-test"
@@ -44,16 +47,7 @@ jobs:
   deploy-staging:
     <<: *defaults
     steps: # a collection of executable commands 
-      - checkout # special step to check out source code to working directory
-      - restore_cache: # special step to restore the dependency cache 
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: "install npm depencencies"
-          command: npm install
-      - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
+      - *steps_project
       - run:
           name: "Pre Deploy"
           command: "scripts/stages/pre-deploy-staging"
@@ -64,16 +58,7 @@ jobs:
   deploy-production:
     <<: *defaults
     steps: # a collection of executable commands 
-      - checkout # special step to check out source code to working directory
-      - restore_cache: # special step to restore the dependency cache 
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: "install npm depencencies"
-          command: npm install
-      - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
+      - *steps_project
       - run:
           name: "Pre Deploy"
           command: "scripts/stages/pre-deploy"
