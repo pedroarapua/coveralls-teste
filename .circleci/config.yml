@@ -3,6 +3,13 @@ defaults: &defaults
   docker:
     - image: circleci/node:8.9
 
+
+default_filters_tag: &default_filters_tag
+  branches:
+    ignore: /.*/
+  tags:
+    only: /v.*/
+
 version: 2
 jobs:
   test:
@@ -94,11 +101,7 @@ workflows:
       - release:
           requires:
             - test
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v.*/
+          filters: *default_filters_tag
       - "approval-stage":
           type: approval
           requires:
@@ -110,16 +113,8 @@ workflows:
           type: approval
           requires:
             - release
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v.*/
+          filters: *default_filters_tag
       - "deploy-production":
           requires:
             - "approval-production"
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v.*/
+          filters: *default_filters_tag
