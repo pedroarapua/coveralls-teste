@@ -18,8 +18,8 @@ stages:
   - test
     if: type IN (push)
     
-  - release
-    if: tag =~ /v.*/
+  #- release
+  #  if: tag =~ /v.*/
 
 jobs:
   include:
