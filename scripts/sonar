@@ -6,17 +6,34 @@ cd "$(dirname "$0")/.."
 export $(egrep -v '^#' .env | xargs)
 
 APP_NAME=$(node -e 'console.log(require("./package.json").name)')
+PULL_REQUEST_ID="${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}"
 
 echo "===> Running Sonar..."
+echo ${PULL_REQUEST_ID}
 
 if ! [ -x "$(command -v ~/sonar-scanner/bin/sonar-scanner)" ]; then
   echo 'Error: sonar-scanner is not installed'
   exit 1
 fi
 
-~/sonar-scanner/bin/sonar-scanner \
-  -Dsonar.projectKey=${SONAR_APP_NAME:-${APP_NAME}} \
-  -Dsonar.organization=${ORGANIZATION_NAME:-pedroarapua-github} \
-  -Dsonar.sources=src \
-  -Dsonar.host.url=https://sonarcloud.io \
-  -Dsonar.login=${SONAR_TOKEN}
+if [ -n "${PULL_REQUEST_ID:-}" ]; then
+  ~/sonar-scanner/bin/sonar-scanner \
+    -Dsonar.analysis.mode=preview \
+    -Dsonar.github.pullRequest=${PULL_REQUEST_ID} \
+    -Dsonar.github.repository=${ORGANIZATION_NAME:-pedroarapua}/${SONAR_APP_NAME:-${APP_NAME}} \
+    -Dsonar.github.oauth=${SONAR_GITHUB_TOKEN} \
+    -Dsonar.projectKey=${SONAR_APP_NAME:-${APP_NAME}} \
+    -Dsonar.organization=${ORGANIZATION_NAME:-pedroarapua-github} \
+    -Dsonar.sources=src \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=${SONAR_TOKEN}
+else
+  ~/sonar-scanner/bin/sonar-scanner \
+    -Dsonar.github.repository=${ORGANIZATION_NAME:-pedroarapua}/${SONAR_APP_NAME:-${APP_NAME}} \
+    -Dsonar.github.oauth=${SONAR_GITHUB_TOKEN} \
+    -Dsonar.projectKey=${SONAR_APP_NAME:-${APP_NAME}} \
+    -Dsonar.organization=${ORGANIZATION_NAME:-pedroarapua-github} \
+    -Dsonar.sources=src \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=${SONAR_TOKEN}
+fi
