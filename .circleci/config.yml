@@ -5,8 +5,6 @@ defaults: &defaults
 
 
 default_filters_tag: &default_filters_tag
-  branches:
-    ignore: /^pull\/.*/
   tags:
     only: /v.*/
 
@@ -106,15 +104,9 @@ workflows:
           type: approval
           requires:
             - test
-          filters:
-            branches:
-              ignore: /^pull\/.*/
       - "deploy-staging":
           requires:
             - "approval-stage"
-          filters:
-            branches:
-              ignore: /^pull\/.*/
       - "approval-production":
           type: approval
           requires:
