@@ -1,4 +1,4 @@
-# coveralls-test
+# coveralls-boilerplate
 
 ![Github All Releases](https://img.shields.io/github/downloads/pedroarapua/coveralls-teste/total.svg)
 ![Travis branch](https://img.shields.io/travis/pedroarapua/coveralls-teste.svg)
